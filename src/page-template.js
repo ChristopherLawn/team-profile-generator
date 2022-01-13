@@ -44,6 +44,7 @@ const generatePage = (managerName, managerId, managerEmail, managerOffice, engin
                         <div class="contact__info">
                             <p>Contact:</p>
                             <a href="https://github.com/${engineerGithub}">GitHub</a>
+                            <br>
                             <a href="mailto:${engineerEmail}">Email</a>
                         </div>
                     </div>
