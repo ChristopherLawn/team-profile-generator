@@ -209,8 +209,10 @@ addManager()
     // .then(addEngineer)
     // .then(addIntern)
     // .then(addEmployee)
+    // .then(addEngineer)
+    // .then(addIntern)
     .then(answers => {
-        const htmlFile = generatePage(answers.managerNameInput, answers.managerIdInput, answers.managerEmailInput, answers.managerOfficeInput);
+        const htmlFile = generatePage(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOffice, answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub, answers.internName, answers.internId, answers.internEmail, answers.internSchool);
 
         fs.writeFile('./dist/team-profile.html', htmlFile, err => {
             if (err) throw err;
