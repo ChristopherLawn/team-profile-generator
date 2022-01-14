@@ -2,6 +2,12 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generatePage = require('./src/page-template.js');
+const Manager = require('./lib/Manager.js');
+const Engineer = require('./lib/Engineer.js');
+const Intern = require('./lib/Intern.js');
+const managerArr = [];
+const engineerArr = [];
+const internArr = [];
 
 // Team Manager prompt
 const addManager = () => {
@@ -203,19 +209,49 @@ const addIntern = () => {
     ]);
 };
 
+const addNewEmployee = () => {
+    return addEmployee().then(answers => {
+    // console.log(answers.addEmployee)
+    if (answers.addEmployee === 'Yes') {
+        engineerOrIntern().then(choice => {
+            if (choice.engineerIntern === 'Engineer') {
+                addEngineer().then(answers => {
+                    const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub)
+                    // console.log(answers.engineerName)
+                    engineerArr.push(engineer)
+                    addNewEmployee()
+                })
+            } else {
+                addIntern().then(answers => {
+                    const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool)
+                    internArr.push(intern)
+                    addNewEmployee()
+                })
+            }
+        }
+        )
+    } else {
+        const htmlFile = generatePage(managerArr, engineerArr, internArr);
+
+        fs.writeFile('./dist/team-profile.html', htmlFile, err => {
+            if (err) throw err;
+            console.log('Team Profile questionnaire complete! Checkout your new team-profile.html file in the "dist" folder!')
+        });
+    }
+})
+}
+
 addManager()
-    // .then(addEmployee)
+    .then(answers => {
+        const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOffice)
+        managerArr.push(manager)
+        addNewEmployee();
+    })
     // .then(engineerOrIntern)
     // .then(addEngineer)
     // .then(addIntern)
     // .then(addEmployee)
     // .then(addEngineer)
     // .then(addIntern)
-    .then(answers => {
-        const htmlFile = generatePage(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOffice, answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub, answers.internName, answers.internId, answers.internEmail, answers.internSchool);
-
-        fs.writeFile('./dist/team-profile.html', htmlFile, err => {
-            if (err) throw err;
-            console.log('Team Profile questionnaire complete! Checkout your new team-profile.html file in the "dist" folder!')
-        });
-    });
+    // .then(answers => {
+    // });

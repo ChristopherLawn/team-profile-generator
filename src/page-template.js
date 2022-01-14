@@ -1,5 +1,8 @@
-const generatePage = (managerName, managerId, managerEmail, managerOffice, engineerName, engineerId, engineerEmail, engineerGithub, internName, internId, internEmail, internSchool) => {
-    return `
+const generatePage = (managerArr, engineerArr, internArr) => {
+    // console.log(managerArr)
+    // console.log(managerArr[0])
+    // console.log(managerArr[0].manager)
+    let profilePage = `
     <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,62 +20,79 @@ const generatePage = (managerName, managerId, managerEmail, managerOffice, engin
     </header>
 
     <div class="container">
+    `
+    for (i = 0; i < managerArr.length; i++) {
+    profilePage += `
         <div class="card">
             <div class="card__body">
                 <span class="tag tag-blue">TEAM MANAGER</span>
-                <h4>${managerName}</h4>
-                <p>Employee ID: ${managerId}</p>
-                <p>Office Number: ${managerOffice}</p>
+                <h4>${managerArr[i].name}</h4>
+                <p>Employee ID: ${managerArr[i].id}</p>
+                <p>Office Number: ${managerArr[i].officeNumber}</p>
                 <div class="card__footer">
                     <div class="contact">
                         <div class="contact__info">
                             <p>Contact:</p>
-                            <a href="mailto:${managerEmail}">Email</a>
+                            <a href="mailto:${managerArr[i].email}">Email</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        `
+    }
 
+    for (i = 0; i < engineerArr.length; i++) {
+    profilePage += `
         <div class="card">
             <div class="card__body">
                 <span class="tag tag-red">ENGINEER</span>
-                <h4>${engineerName}</h4>
-                <p>Employee ID: ${engineerId}</p>
+                <h4>${engineerArr[i].name}</h4>
+                <p>Employee ID: ${engineerArr[i].id}</p>
                 <div class="card__footer">
                     <div class="contact">
                         <div class="contact__info">
                             <p>Contact:</p>
-                            <a href="https://github.com/${engineerGithub}">GitHub</a>
+                            <a href="https://github.com/${engineerArr[i].github}">GitHub</a>
                             <br>
-                            <a href="mailto:${engineerEmail}">Email</a>
+                            <a href="mailto:${engineerArr[i].email}">Email</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        `
+    }
 
+    for (i = 0; i < internArr.length; i++) {
+    profilePage += `
         <div class="card">
         <div class="card__body">
             <span class="tag tag-brown">INTERN</span>
-            <h4>${internName}</h4>
-            <p>Employee ID: ${internId}</p>
-            <p>School: ${internSchool}</p>
+            <h4>${internArr[i].name}</h4>
+            <p>Employee ID: ${internArr[i].id}</p>
+            <p>School: ${internArr[i].school}</p>
             <div class="card__footer">
                 <div class="contact">
                     <div class="contact__info">
                         <p>Contact:</p>
-                        <a href="mailto:${internEmail}">Email</a>
+                        <a href="mailto:${internArr[i].email}">Email</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    `
+    }
+
+    profilePage +=
+    `
     </div>
     
 </body>
 </html>
     `
+    return profilePage;
 };
 
 module.exports = generatePage;
