@@ -1,7 +1,4 @@
 const generatePage = (managerArr, engineerArr, internArr) => {
-    // console.log(managerArr)
-    // console.log(managerArr[0])
-    // console.log(managerArr[0].manager)
     let profilePage = `
     <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +7,7 @@ const generatePage = (managerArr, engineerArr, internArr) => {
     <title>Team Profile</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../src/style.css" />
+    <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
     <header class="header">
