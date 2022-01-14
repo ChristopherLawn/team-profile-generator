@@ -24,7 +24,7 @@ A JavaScript application that allows the user to quickly and easily build a prof
 3. When prompted, select 'Yes' to add additional team members.
     * Select whether the new team member is an 'Engineer' or 'Intern'
     * Answer all prompts accordingly
-3. When you're done building your team, find your newly created `team-profile.html` file - along with the `style.css` file to style it! - in the 'dist' folder located inside the main project folder!
+3. When you're done building your team, find your newly created `team-profile.html` file - along with the `style.css` file to style it - in the 'dist' folder located inside the main project folder.
 4. When creating multiple sites for different teams, make sure to copy and save the 'dist' folder to a separate destination before running the app again.  Each time the app is run, the `team-profile.html` file in the 'dist' folder will be replaced with the newest version.
 
 ## **Demo**
