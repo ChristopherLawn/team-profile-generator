@@ -9,7 +9,7 @@ const managerArr = [];
 const engineerArr = [];
 const internArr = [];
 
-// Team Manager prompt
+// Team Manager prompts
 const addManager = () => {
     return inquirer.prompt([
         {
@@ -73,14 +73,14 @@ const addEmployee = () => {
         {
             type: 'list',
             name: 'addEmployee',
-            message: 'Would you like to add another employee?',
+            message: 'Would you like to add another team member?',
             choices: ['Yes', 'No'],
             default: 'Yes'
         }
     ]);
 };
 
-// If add Team Member - Choose 'Engineer' or 'Intern'
+// If opting to add Team Member - choose 'Engineer' or 'Intern'
 const engineerOrIntern = () => {
     return inquirer.prompt([
         {
@@ -93,7 +93,7 @@ const engineerOrIntern = () => {
     ]);
 };
 
-// Add Engineer
+// Add Engineer prompts
 const addEngineer = () => {
     return inquirer.prompt([
         {
@@ -151,7 +151,7 @@ const addEngineer = () => {
     ]);
 };
 
-// Add Intern
+// Add Intern prompts
 const addIntern = () => {
     return inquirer.prompt([
         {
@@ -209,15 +209,14 @@ const addIntern = () => {
     ]);
 };
 
+// If user opts to add new Team Member - loop through Engineer or Intern prompts.  When user is finished adding Team Members - write 'team-profile.html' file. 
 const addNewEmployee = () => {
     return addEmployee().then(answers => {
-    // console.log(answers.addEmployee)
     if (answers.addEmployee === 'Yes') {
         engineerOrIntern().then(choice => {
             if (choice.engineerIntern === 'Engineer') {
                 addEngineer().then(answers => {
                     const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub)
-                    // console.log(answers.engineerName)
                     engineerArr.push(engineer)
                     addNewEmployee()
                 })
@@ -241,17 +240,10 @@ const addNewEmployee = () => {
 })
 }
 
+// When user completes Team Manager prompts - push answers to 'page-template.js' then call 'addNewEmployee' function
 addManager()
     .then(answers => {
         const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOffice)
         managerArr.push(manager)
         addNewEmployee();
-    })
-    // .then(engineerOrIntern)
-    // .then(addEngineer)
-    // .then(addIntern)
-    // .then(addEmployee)
-    // .then(addEngineer)
-    // .then(addIntern)
-    // .then(answers => {
-    // });
+    });
